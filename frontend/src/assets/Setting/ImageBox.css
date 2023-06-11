@@ -1,0 +1,51 @@
+
+  
+.images_box {
+    position: relative;
+    width: 320px;
+    height: 240px;
+    padding: 10px;
+  }
+  
+.images_box > div {
+    position: absolute;
+    width: 140px;
+    height: 190px;
+    overflow: visible;
+    pointer-events: auto;
+    transform-origin: 50% 50% 0px;
+    border-radius: 5px;
+    color: white;
+    line-height: 90px;
+    padding-left: 32px;
+    font-size: 14.5px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+.new_image {
+  background-color:#fffdfd;;
+}
+
+.new_image_input {
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.add_image {
+  position: absolute;
+  font-size: 50px !important;
+  color: darkturquoise;
+  bottom: 0vh;
+  right: 0vw;
+}
+
+.delete_image {
+  position: absolute;
+  bottom: 0vh;
+  right: 0vw;
+  color: hotpink;
+  font-size: 30px !important;
+}
