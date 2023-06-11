@@ -9,16 +9,14 @@ from rest_framework.decorators import api_view, renderer_classes
 from rest_framework.response import Response
 from django.http import JsonResponse, HttpResponse
 from django.core.files.storage import get_storage_class
-import boto3
 from django.conf import settings
 from django.core.files.uploadedfile import InMemoryUploadedFile, UploadedFile
 from PIL import Image
 from pathlib import Path
-import botocore
 import sys
 import re
 sys.path.append('../')
-from Profile.models import Profile , Picture
+from profiles.models import Profile , Picture
 
 
 
@@ -239,18 +237,4 @@ def download(request, pk):
     KEY = 'my_image_in_s3.jpg' # replace with your object key
     downloading_file = get_object_or_404(File, pk=pk)
 
-    s3 = boto3.resource('s3')
-
-    try:
-        print(settings.AWS_STORAGE_BUCKET_NAME)
-        downloads_path = str(Path.home() / "Downloads")
-        file_path = r"C:\Users\{0}\Downloads\{1}".format('', '')
-        print(downloads_path + '\\' + str(downloading_file))
-        s3.Bucket(settings.AWS_STORAGE_BUCKET_NAME).download_file(str(downloading_file), downloads_path + '\\' + str(downloading_file))
-    except botocore.exceptions.ClientError as e:
-        if e.response['Error']['Code'] == "404":
-            print("The object does not exist.")
-        else:
-            raise
-    return HttpResponse('downloaded successfully')
     
