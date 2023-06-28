@@ -1,0 +1,144 @@
+/* .setting {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+} */
+
+#setting_content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+
+.Button {
+    max-width: 300px;
+    margin: 40px;
+    max-height: 500px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+.setting_button1 {
+    color: white;
+    height: 70px;
+    /* max-height: 70px; */
+    min-width: 250px;
+    font-size: 25px;
+    border-radius: 40px;
+    background: linear-gradient(-135deg, #F2B9A1, #EA6264);
+    border: none;
+    transition: all 0.3s ease-in;
+    position: relative;
+    margin: 20px;
+}
+
+.setting_button1:focus {
+    outline: none;
+}
+
+.setting_button1:hover {
+    background: linear-gradient(-135deg, #f7ae8e, #e26365);
+}
+
+.setting_button1:active span::after {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 300px;
+    height: 90px;
+    border-radius: 40px;
+    margin-top: -10px;
+    margin-left: -27px;
+    content: "";
+    background: linear-gradient(-135deg, #F2B9A1, #EA6264);
+    border-radius: 100%;
+    opacity: 0;
+    animation: ripple 0.3s 1 ease-out;
+}
+
+.setting_button2 {
+    color: white;
+    height: 70px;
+    /* max-height: 70px; */
+    min-width: 250px;
+    font-size: 25px;
+    border-radius: 40px;
+    background: linear-gradient(-135deg, #aa7f6d, #f0595b);
+    border: none;
+    transition: all 0.3s ease-in;
+    position: relative;
+    margin: 20px;
+}
+
+.setting_button2:focus {
+    outline: none;
+}
+
+.setting_button2:hover {
+    background: linear-gradient(-135deg, #fc7962, #f3b276);
+}
+
+.setting_button2:active span::after {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 300px;
+    height: 90px;
+    border-radius: 40px;
+    margin-top: -10px;
+    margin-left: -27px;
+    content: "";
+    background: linear-gradient(-135deg, #F2B9A1, #EA6264);
+    border-radius: 100%;
+    opacity: 0;
+    animation: ripple 0.3s 1 ease-out;
+}
+.setting_button3 {
+    color: white;
+    height: 70px;
+    /* max-height: 70px; */
+    min-width: 250px;
+    font-size: 25px;
+    border-radius: 40px;
+    background: linear-gradient(-135deg, #ecb77a, #ee6163);
+    border: none;
+    transition: all 0.3s ease-in;
+    position: relative;
+    margin: 20px;
+}
+
+.setting_button3:focus {
+    outline: none;
+}
+
+.setting_button3:hover {
+    background: linear-gradient(-135deg, #f7b258, #e7765a);
+}
+
+.setting_button3:active span::after {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 300px;
+    height: 90px;
+    border-radius: 40px;
+    margin-top: -10px;
+    margin-left: -27px;
+    content: "";
+    background: linear-gradient(-135deg, #F2B9A1, #EA6264);
+    border-radius: 100%;
+    opacity: 0;
+    animation: ripple 0.3s 1 ease-out;
+}
+@keyframes ripple {
+    0% {
+      opacity: 1;
+      transform: scale(0.0);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(1.0);
+    }
+  }

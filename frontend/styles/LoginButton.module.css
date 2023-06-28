@@ -1,0 +1,27 @@
+.loginButton {
+    background: white;
+    border-radius: 50px;
+    width: 300px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    position: relative;
+  }
+  
+  .iconImage {
+    margin-right: 10px;
+  }
+  
+  .loginText {
+    position: absolute;
+    left: 110px;
+    font-size: 15px;
+  }
+  
+  .loginIconContainer {
+    position: absolute;
+    left: 50px;
+    top: 3px;
+  }
+  

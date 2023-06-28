@@ -1,0 +1,18 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid white;
+}
+
+#header_icon {
+    padding: 20px;
+    outline: none;
+  
+  }
+
+#header_logo {
+    padding: 20px;
+    color: aqua;
+    outline: none;
+}

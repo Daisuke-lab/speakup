@@ -1,0 +1,84 @@
+/* .login_header {
+    display: flex;
+    justify-content: space-between;
+    margin: 0px;
+} */
+#login_back {
+    margin: 20px;
+    font-size: 30px;
+    outline: none;
+}
+
+#login_logo{
+    font-size: 65px;
+    margin-top: 10px;
+    margin-left: 10px;
+    
+}
+.login_title {
+    font-size: 50px;
+    font-family: 'Sonsie One';
+    display: flex;
+    margin-right: 15px;
+    margin-top: 0px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.login_form {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 420px;
+    margin-top: 50px;
+    vertical-align: middle;
+}
+.login_input {
+    align-items: center;
+    border-radius: 40px;
+    padding: 15px;
+    margin: 10px;
+    border-color: aqua;
+    width: 400px;
+    outline: none;
+}
+
+.login_button {
+    bottom: 5vh;
+    color: white;
+    height: 70px;
+    min-width: 250px;
+    font-size: 35px;
+    border-radius: 40px;
+    background: linear-gradient(-135deg, #3f4848, #13ffec);
+    border: none;
+    transition: all 0.3s ease-in;
+    position: relative;
+    margin: 20px;
+    margin-top: 80px;
+}
+
+.login_button:focus {
+    outline: none;
+}
+
+.login_button:hover {
+    background: linear-gradient(-135deg, #83cfda, #4fe6d9);
+}
+
+.login_button:active span::after {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 300px;
+    height: 90px;
+    border-radius: 40px;
+    margin-top: -10px;
+    margin-left: -27px;
+    content: "";
+    background: linear-gradient(-135deg, #9acdf7, #6aeeff);
+    border-radius: 100%;
+    opacity: 0;
+    animation: ripple 0.3s 1 ease-out;
+}

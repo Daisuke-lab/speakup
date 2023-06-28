@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat&display=swap');
+
+#match_card {
+    max-width: 345px;
+    min-width: 345px;
+    min-height: 590px;
+    max-height: 590px;
+    /* margin: 30px;
+    margin-top: 40px; */
+    overflow-y: auto;
+  }
+
+#match_card .MuiIconButton-root {
+    box-shadow:0px 10px 53px 0px gray;
+    background-color: white;
+}
+#match_card {
+    position: relative;
+    width: 345px;
+    height: 570px;
+    overflow-y: auto;
+}
+
+#match_card::-webkit-scrollbar {
+    display: none;
+  }
+#match_card p1 {
+    position: absolute;
+    bottom: 130px
+}
+
+
+
+#card_imagebox h1 {
+    position: absolute;
+    top: 75%;
+    left: 5%;
+    font-size: 70px;
+    font-family: 'Caveat', cursive;
+    color: palevioletred;
+
+}
+
+
+#match_icon {
+    color:aqua;
+    outline: none;
+    float: right;
+    margin: 20px;
+    position: absolute;
+    top:0;
+    right:0
+}
+
+#match_icon .MuiSvgIcon-root  {
+    fill: currentColor;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    font-size: 1.5rem;
+    transition: fill 200ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    flex-shrink: 0;
+    -webkit-user-select: none;
+    user-select: none;
+    font-size: large !important;
+}
+
+
+
+
+
+
+
+.match_form {
+    border: 1px solid palevioletred;
+    border-radius: 40px;
+    padding: 3px;
+    margin: 5px;
+    /* position: absolute; */
+    margin-bottom: 10px;
+}
+
+.match_input {
+    flex: 1;
+    padding: 10px;
+    border:none;
+    outline: none;
+    margin-left: 10px;
+    width: 230px;
+}
+
+.match_submit{
+    border:none;
+    margin-right: 20px;
+    background-color: white;
+    font-weight: bolder;
+    color: palevioletred;
+    margin-left: 10px;
+
+}

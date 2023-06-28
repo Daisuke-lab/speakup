@@ -1,0 +1,34 @@
+/* @media screen and (min-width: 900px) {
+    #frame .content {
+      width: calc(100% - 340px);
+    }
+  /* } */
+  /* #frame .content .contact-profile {
+    width: 100%;
+    height: 80px;
+    line-height: 80px;
+    background: pink;
+  } */ 
+  /* #frame .content .contact-profile img {
+    width: 60px;
+    border-radius: 50%;
+    float: left;
+    margin: 9px 12px 0 9px;
+  }
+  #frame .content .contact-profile p {
+    float: left;
+    font-size: 18px;
+  }
+  #frame .content .contact-profile .social-media {
+    float: right;
+  }
+  #frame .content .contact-profile .social-media i {
+    margin-left: 14px;
+    cursor: pointer;
+  }
+  #frame .content .contact-profile .social-media i:nth-last-child(1) {
+    margin-right: 20px;
+  }
+  #frame .content .contact-profile .social-media i:hover {
+    color: #435f7a;
+  } */

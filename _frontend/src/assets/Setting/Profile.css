@@ -1,0 +1,22 @@
+
+#profile_root {
+    max-width: 345px;
+    min-width: 345px;
+    max-height: 570px;
+    margin: 40px;
+    overflow-y: auto
+}
+#profile_root::-webkit-scrollbar {
+    display: none;
+  }
+.media {
+    height: 400px;
+    padding-top: 56.25%;
+};
+
+/* .avatar {
+    background-color: palevioletred;
+}; */
+
+
+  
