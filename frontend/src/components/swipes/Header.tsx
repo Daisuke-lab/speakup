@@ -1,10 +1,9 @@
 import React from 'react'
 import '../assets/Swipe/Header.css'
-import PersonIcon from '@material-ui/icons/Person';
-import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import SpaIcon from '@material-ui/icons/Spa';
-// import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
-import { IconButton } from '@material-ui/core';
+import PersonIcon from '@mui/icons-material/Person';
+import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import SpaIcon from '@mui/icons-material/Spa';
+import IconButton from '@mui/material/IconButton';
 
 
 // there is two Header so far in App.js. the one is without variable and the other is with a variable

@@ -1,25 +1,44 @@
 import { NextPage } from "next"
-import TinderCard as CardController from 'react-tinder-card'
+import TinderCard  from 'react-tinder-card'
 import Header from "../src/components/swipes/Header"
 import Footer from "../src/components/swipes/Footer"
+import Card from "../src/components/swipes/Card"
 
 
 const Swipe: NextPage = () => {
-    const people = []
+    const people:any[] = []
+    const CardController = TinderCard
+
+    const swipeLeft = () => {
+
+    }
+
+    const swipeRight = () => {
+
+    }
+
+    const onSwipe = (direction:string, person:any) => {
+        switch(direction) {
+            case "left":
+                swipeLeft(person)
+            case "right":
+                swipeRight(person)
+        }
+    }
+
     return (
         <>
         <Header/>
         {people.map((person) => (
             <CardController
-            ref={childRefs[index]} className='swipe' 
-          key={person.name} onSwipe={(dir) => swiped(dir, person)}
-          onCardLeftScreen={() => outOfFrame(person.name)}
-          preventSwipe={['up', 'down']}
-            >
+                className='swipe' 
+                key={`card-controller-${person.id}`}
+                onSwipe={(direction:string) => onSwipe(direction, person)}
+                preventSwipe={['up', 'down']}>
                 <Card person={person} />
             </CardController>
         ))}
-        <Footer/>
+        <Footer swipeLeft={swipeLeft} swipeRight={swipeRight}/>
         </>
     )
 }

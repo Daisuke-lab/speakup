@@ -1,19 +1,11 @@
 import React from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import MobileStepper from '@material-ui/core/MobileStepper';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
 import clsx from 'clsx';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import '../assets/Swipe/Card.css'
+import { CardActions, CardContent, Collapse, IconButton, MobileStepper, Typography, makeStyles } from '@mui/material';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -49,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function OneCard(props) {
+function Card(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -165,5 +157,5 @@ function OneCard(props) {
 }
 
 
-export default OneCard;
+export default Card;
 

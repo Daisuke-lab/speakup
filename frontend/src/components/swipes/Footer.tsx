@@ -1,9 +1,10 @@
 import React from 'react'
 import '../assets/Swipe/Footer.css'
-import ReplayIcon from '@material-ui/icons/Replay';
-import CloseIcon from '@material-ui/icons/Close';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import { IconButton } from '@material-ui/core';
+import ReplayIcon from '@mui/icons-material/Replay';
+import CloseIcon from '@mui/icons-material/Close';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import IconButton from '@mui/material/IconButton';
+
 
 interface Props {
     swipeLeft: any,
