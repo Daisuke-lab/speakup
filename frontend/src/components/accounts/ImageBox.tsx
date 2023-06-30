@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import clamp from 'lodash-es/clamp'
 import swap from 'lodash-move'
+import {move} from "lodash"
 import { useGesture, useDrag} from 'react-use-gesture'
 import { useSprings, interpolate, animated } from 'react-spring'
 import { IconButton } from '@material-ui/core';
@@ -86,7 +87,7 @@ function ImagesBox(props) {
       new_index = 0
     }
     // swap(array, a index, other index) => ex) swap([1,2,3,4], 1, 2) => [1,3,2,4]
-    let newOrder = swap(order.current, curIndex, new_index)
+    let newOrder = move(order.current, curIndex, new_index)
     // newOrder = swap(newOrder, curIndex, curCol)
     setSprings(fn(newOrder, down, originalIndex, curIndex, x, y)) // Feed springs new style data, they'll animate the view without causing a single render
     if (!down) order.current = newOrder

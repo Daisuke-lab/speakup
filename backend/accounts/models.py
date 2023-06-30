@@ -1,56 +1,98 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager
+from django.contrib.auth import get_user_model
+from django.core.files.storage import get_storage_class
+# User = get_user_model()
 # Create your models here.
-class UserAccountManager(BaseUserManager):
-    def create_user(self, email, name, password=None, **extra_fields):
-        if not email:
-            raise ValueError('User must have an eamil address')
-
-        email = self.normalize_email(email)
-        user = self.model(email=email, name=name, **extra_fields)
-
-        user.set_password(password)
-        user.save()
-
-        return user #'NoneType' object has no attribute 'is_active'
-
-    def create_superuser(self, email, name, password, **extra_fields):
-        extra_fields.setdefault('is_staff', True)
-        extra_fields.setdefault('is_superuser', True)
-
-        if extra_fields.get('is_staff') is not True:
-            raise ValueError('Superuser must have true value of is_staff')
-
-        if extra_fields.get('is_superuser') is not True:
-            raise ValueError('Superuser must have true value of is_superuser')
-
-        return self.create_user(email, name, password, **extra_fields)
 
 
 
-
-class UserAccount(AbstractBaseUser, PermissionsMixin):
-    name = models.CharField(max_length=255)
-    email = models.EmailField(max_length=255, unique=True)
-    is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
-    is_superuser = models.BooleanField(default=False)
-    admin = models.BooleanField(default=False)
-
-    objects = UserAccountManager()
+class Image(models.Model):
+    #upload_to='images/'
+    image = models.ImageField()
+    x = models.FloatField(null=True)
+    y = models.FloatField(null=True)
+    width = models.FloatField(null=True)
+    height = models.FloatField(null=True)
 
 
-    #USERNAME_FIELD is what you use to login. I know. the name is suck. It should be LOGIN_FIELD
-    # In default, USERNAME_FIELD is name, but you don'T want to login using name. do you?
-    USERNAME_FIELD = 'email'
-    #REQUIRED_FIELDS is essntial text besides USENAME_FIELD and password
-    REQUIRED_FIELDS = ['name']
 
-    def get_full_name(self):
-        return self.name
+class Availability(models.Model):
+    class Day(models.IntegerChoices):
+        MONDAY = 1
+        THUESDAY = 2
+        WEDNESDAY = 3
+        THURSDAY = 4
+        FRIDAY = 5
+        SATURDAY = 6
+        SUNDAY = 7
+    day = models.IntegerField(choices=Day.choices)
+    start_time = models.TimeField()
+    end_time = models.TimeField()
 
-    def get_short_name(self):
-        return self.name
+
 
     def __str__(self):
-        return self.email
+        return self.name
+    
+class User(models.Model):
+    id = models.CharField(max_length=200,primary_key=True)
+    name = models.CharField(max_length=200,null=True)
+    mc_id = models.IntegerField(null=True)
+    email = models.CharField(max_length=200, unique=True,null=True)
+    emailVerified = models.DateTimeField(null=True)
+    image = models.CharField(max_length=1000, null=True)
+    class Meta:
+        db_table = 'user'
+ 
+class Account(models.Model):
+    id = models.CharField(max_length=200,primary_key=True)
+    user = models.ForeignKey(User, db_column='userId', on_delete=CASCADE)
+    type = models.CharField(max_length=200)
+    provider = models.CharField(max_length=200)
+    providerAccountId = models.CharField(max_length=200)
+    refresh_token = models.TextField(max_length=1000, null=True)
+    access_token = models.TextField(max_length=1000, null=True)
+    expires_at = models.IntegerField(null=True)
+    token_type = models.CharField(max_length=200, null=True)
+    scope = models.CharField(max_length=200, null=True)
+    id_token = models.TextField(max_length=1000, null=True)
+    session_state = models.CharField(max_length=200, null=True)
+    oauth_token_secret = models.CharField(max_length=200, null=True)
+    oauth_token = models.CharField(max_length=200, null=True)
+ 
+    class Meta:
+        unique_together = [['provider', 'providerAccountId']]
+        db_table = 'account'
+ 
+ 
+ 
+class Session(models.Model):
+    id = models.CharField(max_length=200,primary_key=True)
+    sessionToken = models.CharField(max_length=200, unique=True)
+    user = models.ForeignKey(User, db_column='userId', on_delete=CASCADE)
+    expires = models.DateTimeField()
+ 
+    class Meta:
+        db_table = 'session'
+ 
+ 
+class VerificationToken(models.Model):
+    identifier = models.CharField(max_length=200)
+    token = models.CharField(max_length=200, unique=True)
+    expires = models.DateTimeField()
+ 
+    class Meta:
+        unique_together = [['identifier', 'token']]
+        db_table = 'verificationtoken'
+
+
+class Profile(models.Model):
+    name = models.CharField(max_length=20, null=True)
+    age = models.CharField(blank=True, null=True, max_length=3)
+    gender = models.CharField(blank=True, max_length=10, null=True)
+    native_lan = models.CharField(max_length=20)
+    foreign_lan = models.CharField(max_length=20)
+    location = models.CharField(blank=True, max_length=30, null=True)
+    intro = models.TextField(blank=True, null=True)
+    images = models.ManyToManyField(Image, blank=True)
+    availabilities = models.ManyToManyField(Availability, blank=True)

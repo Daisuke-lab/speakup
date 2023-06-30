@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Match(props) {
   const classes = useStyles();
-  // const [open, setOpen] = React.useState(props.onOpen);
 
   return (
     <div>

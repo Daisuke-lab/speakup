@@ -32,7 +32,6 @@ ALLOWED_HOSTS = [
     'localhost'
     ]
 
-AUTH_USER_MODEL = 'accounts.UserAccount'
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,10 +46,9 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'rest_framework',
     'rest_framework.authtoken', #added
-    'accounts',
     'chats',
-    'djoser',
-    'profiles',
+    'accounts',
+    'swipes',
     'django_filters',
     #'django_file_download',
     # 'easy_thumbnails',  => crop

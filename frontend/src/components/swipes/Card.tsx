@@ -3,7 +3,6 @@ import clsx from 'clsx';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import SwipeableViews from 'react-swipeable-views';
 import '../assets/Swipe/Card.css'
 import { CardActions, CardContent, Collapse, IconButton, MobileStepper, Typography, makeStyles } from '@mui/material';
 

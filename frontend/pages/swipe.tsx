@@ -1,5 +1,5 @@
 import { NextPage } from "next"
-import TinderCard  from 'react-tinder-card'
+import {default as CardController}  from 'react-tinder-card'
 import Header from "../src/components/swipes/Header"
 import Footer from "../src/components/swipes/Footer"
 import Card from "../src/components/swipes/Card"
@@ -7,7 +7,6 @@ import Card from "../src/components/swipes/Card"
 
 const Swipe: NextPage = () => {
     const people:any[] = []
-    const CardController = TinderCard
 
     const swipeLeft = () => {
 
@@ -35,7 +34,7 @@ const Swipe: NextPage = () => {
                 key={`card-controller-${person.id}`}
                 onSwipe={(direction:string) => onSwipe(direction, person)}
                 preventSwipe={['up', 'down']}>
-                <Card person={person} />
+                    <Card person={person} />
             </CardController>
         ))}
         <Footer swipeLeft={swipeLeft} swipeRight={swipeRight}/>
