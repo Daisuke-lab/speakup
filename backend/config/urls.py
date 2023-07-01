@@ -5,14 +5,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 # , namespace='chat'
+
+prefix = f"api/{settings.API_VERSION}"
 urlpatterns = [
-    path('chat-api/', include(('chats.api.urls','chats'), namespace='chats')),
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.jwt')),
-    path('profile/', include('profiles.urls')),
-    path('swipe/', include('profiles.swipe.urls')),
+    path(f'{prefix}/chats', include('chats.urls')),
+    path(f'{prefix}/accounts', include('accounts.urls')),
+    path(f'{prefix}/swipes', include('swipes.urls')),
 ] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 #django.contrib.auth.urls

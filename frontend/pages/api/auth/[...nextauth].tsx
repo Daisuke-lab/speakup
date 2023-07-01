@@ -1,11 +1,12 @@
 import NextAuth, {Session, User} from "next-auth"
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter"
-import clientPromise from "./lib/mongodb"
 import GitHubProvider from "next-auth/providers/github";
+import { PrismaClient } from "@prisma/client";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { Adapter } from "next-auth/adapters";
 
-const adapter = clientPromise === null?undefined :MongoDBAdapter(clientPromise)
+const prisma = new PrismaClient()
 interface SessionProps {
   user: User,
   session:Session,
@@ -13,7 +14,7 @@ interface SessionProps {
 }
 export default NextAuth({
  // Configure one or more authentication providers
- adapter: adapter,
+ adapter: PrismaAdapter(prisma) as Adapter,
  providers: [
     GoogleProvider({
     clientId: process.env.GOOGLE_CLIENT_ID ?? "",

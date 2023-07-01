@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Profile, Picture
+from .models import Profile, Image
 from django.db.models import F, Value
 from PIL import Image
 import io
@@ -19,7 +19,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 class ImageSerializer(serializers.ModelSerializer):
     #absolute_url = serializers.SerializerMethodField()
     class Meta:
-        model = Picture
+        model = Image
         fields = '__all__'
 
     def create(self, validated_data):
@@ -39,7 +39,7 @@ class ImageSerializer(serializers.ModelSerializer):
         data = {'image':serialzed_image, 'album':album, 'x':x, 'y':y, 'width':width, 'height':height}
         # return image
 
-        return Picture.objects.create(**data)
+        return Image.objects.create(**data)
 
     # def get_absolute_url(self, picture):
     #     print('ABSOLUTE')

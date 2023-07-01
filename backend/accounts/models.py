@@ -6,33 +6,7 @@ from django.core.files.storage import get_storage_class
 
 
 
-class Image(models.Model):
-    #upload_to='images/'
-    image = models.ImageField()
-    x = models.FloatField(null=True)
-    y = models.FloatField(null=True)
-    width = models.FloatField(null=True)
-    height = models.FloatField(null=True)
 
-
-
-class Availability(models.Model):
-    class Day(models.IntegerChoices):
-        MONDAY = 1
-        THUESDAY = 2
-        WEDNESDAY = 3
-        THURSDAY = 4
-        FRIDAY = 5
-        SATURDAY = 6
-        SUNDAY = 7
-    day = models.IntegerField(choices=Day.choices)
-    start_time = models.TimeField()
-    end_time = models.TimeField()
-
-
-
-    def __str__(self):
-        return self.name
     
 class User(models.Model):
     id = models.CharField(max_length=200,primary_key=True)
@@ -46,7 +20,7 @@ class User(models.Model):
  
 class Account(models.Model):
     id = models.CharField(max_length=200,primary_key=True)
-    user = models.ForeignKey(User, db_column='userId', on_delete=CASCADE)
+    user = models.ForeignKey(User, db_column='userId', on_delete=models.CASCADE)
     type = models.CharField(max_length=200)
     provider = models.CharField(max_length=200)
     providerAccountId = models.CharField(max_length=200)
@@ -69,7 +43,7 @@ class Account(models.Model):
 class Session(models.Model):
     id = models.CharField(max_length=200,primary_key=True)
     sessionToken = models.CharField(max_length=200, unique=True)
-    user = models.ForeignKey(User, db_column='userId', on_delete=CASCADE)
+    user = models.ForeignKey(User, db_column='userId', on_delete=models.CASCADE)
     expires = models.DateTimeField()
  
     class Meta:
@@ -87,6 +61,7 @@ class VerificationToken(models.Model):
 
 
 class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=20, null=True)
     age = models.CharField(blank=True, null=True, max_length=3)
     gender = models.CharField(blank=True, max_length=10, null=True)
@@ -94,5 +69,34 @@ class Profile(models.Model):
     foreign_lan = models.CharField(max_length=20)
     location = models.CharField(blank=True, max_length=30, null=True)
     intro = models.TextField(blank=True, null=True)
-    images = models.ManyToManyField(Image, blank=True)
-    availabilities = models.ManyToManyField(Availability, blank=True)
+
+
+class Image(models.Model):
+    #upload_to='images/'
+    image = models.ImageField()
+    x = models.FloatField(null=True)
+    y = models.FloatField(null=True)
+    width = models.FloatField(null=True)
+    height = models.FloatField(null=True)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+
+
+class Availability(models.Model):
+    class DayOfWeek(models.IntegerChoices):
+        MONDAY = 1
+        THUESDAY = 2
+        WEDNESDAY = 3
+        THURSDAY = 4
+        FRIDAY = 5
+        SATURDAY = 6
+        SUNDAY = 7
+    day_of_week = models.IntegerField(choices=DayOfWeek.choices)
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+
+
+    def __str__(self):
+        return self.name

@@ -4,8 +4,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import '../assets/Swipe/Card.css'
-import { CardActions, CardContent, Collapse, IconButton, MobileStepper, Typography, makeStyles } from '@mui/material';
-
+import { Button, CardActions, CardContent, Collapse, IconButton, MobileStepper, Typography, makeStyles } from '@mui/material';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,6 +40,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+interface Props {
+  
+}
 function Card(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -84,11 +87,11 @@ function Card(props) {
   return (
       <Card id='card_root'>
         <div id='card_imagebox' style={{position:'relative'}}>
-          <SwipeableViews
-            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-            index={activeStep}
-            onChangeIndex={handleStepChange}
-            enableMouseEvents
+        <Swiper
+            spaceBetween={50}
+            slidesPerView={1}
+            onSlideChange={() => console.log('slide change')}
+            onSwiper={(swiper) => console.log(swiper)}
           >
         {props.images !== null?props.images === undefined?props.data.images.map((step, index) => (
             <div key={props.data.name}>
@@ -101,7 +104,7 @@ function Card(props) {
                 <img className={classes.img} src={step.image}/>
               ) :null }
             </div>)):null}
-          </SwipeableViews>
+          </Swiper>
           <div id='card_stepper'>
           <MobileStepper
           variant="dots"

@@ -5,7 +5,7 @@ from rest_framework.mixins import RetrieveModelMixin, CreateModelMixin, UpdateMo
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from .serializers import ProfileSerializer, ImageSerializer
-from .models import Profile, Picture
+from .models import Profile, Image
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, renderer_classes
@@ -13,7 +13,7 @@ from .filters import ProfileFilter
 import django_filters.rest_framework
 from django.http import JsonResponse, HttpResponse, Http404, HttpResponseRedirect
 from django.core.files.storage import get_storage_class
-from PIL import Image
+# from PIL import Image
 import os
 from django.conf import settings
 from django.core import serializers
@@ -36,11 +36,11 @@ def get_images(request, pk):
     images_list = []
     if pk:
         profile = get_object_or_404(Profile, pk=pk)
-        images = Picture.objects.filter(album=profile)
+        images = Image.objects.filter(album=profile)
         for image in images:
-            url = get_object_or_404(Picture, id=image.id)
-            picture = Image.open(url.image)
-            cropped_image = picture.crop((url.x, url.y, url.x+url.width, url.y+url.height))
+            url = get_object_or_404(Image, id=image.id)
+            Image = Image.open(url.image)
+            cropped_image = Image.crop((url.x, url.y, url.x+url.width, url.y+url.height))
             images_list.append(cropped_image)
 
 
@@ -89,13 +89,13 @@ class ProfileList(ListAPIView):
 
 
 class ImageListCreate(ListCreateAPIView):
-    queryset = Picture.objects.all()
+    queryset = Image.objects.all()
     serializer_class = ImageSerializer
 
 
 
 class ImageDetail(RetrieveUpdateDestroyAPIView):
-    queryset = Picture.objects.all()
+    queryset = Image.objects.all()
     serializer_class = ImageSerializer
 
     # def get(self, request, *args, **kwargs):
@@ -104,7 +104,7 @@ class ImageDetail(RetrieveUpdateDestroyAPIView):
         media_storage = get_storage_class()()
         images_list = []
         pk = self.kwargs['pk']
-        images = Picture.objects.filter(album=pk)
+        images = Image.objects.filter(album=pk)
         serializer = ImageSerializer(images, many=True)
         for image in images:
             # image = ImageSerializer(i, context={"request": request})
