@@ -60,13 +60,15 @@ class VerificationToken(models.Model):
         db_table = 'verificationtoken'
 
 
+class Language(models.Model):
+    name = models.CharField(max_length=200)
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=20, null=True)
     age = models.CharField(blank=True, null=True, max_length=3)
-    gender = models.CharField(blank=True, max_length=10, null=True)
-    native_lan = models.CharField(max_length=20)
-    foreign_lan = models.CharField(max_length=20)
+    native_language = models.ForeignKey(Language, null=True, on_delete=models.SET_NULL, related_name="native_language")
+    foreign_language = models.ForeignKey(Language, null=True, on_delete=models.SET_NULL, related_name="foreign_language")
     location = models.CharField(blank=True, max_length=30, null=True)
     intro = models.TextField(blank=True, null=True)
 

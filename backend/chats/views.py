@@ -5,8 +5,8 @@ from .models import *
 from rest_framework import permissions
 import json
 from rest_framework.generics import *
-from chats.models import Chat, Contact, File, Message
-from .serializers import ChatSerializers, ContactSerializers, FileSerializers, MessageSerializers
+from chats.models import Chat, File, Message
+from .serializers import ChatSerializers, FileSerializers, MessageSerializers
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework.decorators import api_view, renderer_classes
@@ -157,48 +157,6 @@ class ChatDeleteView(DestroyAPIView):
 # update create, destroy permissons.IsAuthenticated
 
 
-class ContactListView(ListAPIView):
-    serializer_class = ContactSerializers
-    permission_classes = [permissions.IsAuthenticated]
-
-
-    def get_queryset(self):
-        queryset = Contact.objects.all()
-        name = self.request.query_params.get('name')
-        print('name::', name)
-        if name:
-            contact = get_user_contact(name)
-            #chats is related name
-            print('contact::', contact.chats)
-
-            queryset = contact.chats.all()
-
-        return queryset
-
-
-
-
-class ContactDetailView(RetrieveAPIView):
-    queryset = Contact.objects.all()
-    serializer_class = ContactSerializers
-    permission_classes = [permissions.AllowAny]
-
-class ContactUpdateView(UpdateAPIView):
-    queryset = Contact.objects.all()
-    serializer_class = ContactSerializers
-    permission_classes = [permissions.IsAuthenticated]
-
-
-class ContactCreateView(CreateAPIView):
-    queryset = Contact.objects.all()
-    serializer_class = ContactSerializers
-    permission_classes = [permissions.AllowAny]
-
-
-class ContactDeleteView(DestroyAPIView):
-    queryset = Contact.objects.all()
-    serializer_class = ContactSerializers
-    permission_classes = [permissions.IsAuthenticated]
 
 
 class FileListCreateView(ListCreateAPIView):

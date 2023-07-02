@@ -4,25 +4,34 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import CloseIcon from '@mui/icons-material/Close';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import IconButton from '@mui/material/IconButton';
+import ProfileType from '../../../types/ProfileType';
+import { useAppSelector } from '../../utils/hooks';
 
 
 interface Props {
-    swipeLeft: any,
-    swipeRight: any
+    onSwipe: (direction: string, profile: ProfileType) => void,
+    disabled: boolean
 }
 
 
 function Footer(props:Props) {
-    const {swipeLeft, swipeRight} = props
+    const {onSwipe, disabled} = props
+    const currentProfile = useAppSelector(state => state.swipes.currentProfile)
+
+    const onClick = (direction:string) => {
+      if (currentProfile !== null) {
+          onSwipe(direction, currentProfile)
+      }
+    }
   return (
     <div className="footer">
-      <IconButton id='swipeButtons_nope' onClick={swipeLeft}>
+      <IconButton id='swipeButtons_nope' onClick={() => onClick("left")}>
         <CloseIcon fontSize='large'/>
       </IconButton>
       <IconButton id='swipeButtons_repeat'>
         <ReplayIcon fontSize='large'/>
       </IconButton>
-      <IconButton id='swipeButtons_like' onClick={swipeRight}>
+      <IconButton id='swipeButtons_like' onClick={() => onClick("right")}>
         <FavoriteIcon fontSize='large'/>
       </IconButton>
     </div>

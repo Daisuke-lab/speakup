@@ -3,141 +3,49 @@ import clsx from 'clsx';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import '../assets/Swipe/Card.css'
-import { Button, CardActions, CardContent, Collapse, IconButton, MobileStepper, Typography, makeStyles } from '@mui/material';
+import { Button, Card, CardActions, CardContent, Collapse, IconButton, MobileStepper, Typography, makeStyles } from '@mui/material';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import ProfileType from '../../../types/ProfileType';
+import styles from "../../../styles/Card.module.css"
+import Image from "next"
+import CardImageStepper from './CardImageStepper';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    maxWidth: 400,
-    flexGrow: 1,
-  },
-  header: {
-    display: 'flex',
-    alignItems: 'center',
-    height: 50,
-    paddingLeft: theme.spacing(4),
-    backgroundColor: theme.palette.background.default,
-  },
-  img: {
-    height: 475,
-    display: 'block',
-    maxWidth: 400,
-    overflow: 'hidden',
-    width: '100%',
-  },
-  expand: {
-    transform: 'rotate(0deg)',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    outline: 'none',
-    transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest,
-    }),
-  },
-  expandOpen: {
-    transform: 'rotate(180deg)',
-  },
-}));
+
 
 interface Props {
-  
+  profile: ProfileType
 }
-function Card(props) {
-  const classes = useStyles();
+function ProfileCard(props:Props) {
+  const {profile} = props
   const [expanded, setExpanded] = React.useState(false);
+
 
   const handleExpandClick = () => {
     setExpanded(!expanded); 
   }
 
-  const theme = useTheme();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const maxSteps = (props.data.images!= null && props.data.images.length >0)? props.data.images.length: 1
 
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
+  
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
 
-  const handleStepChange = (step) => {
-    setActiveStep(step);
-  };
-
-  function time() {
-    var time_range = null
-    props.data.time_start != null || props.data.time_end != null ?
-    time_range = <>{props.data.time_start}~{props.data.time_end}</>
-    :  time_range = (<></>)
-    return time_range
-}
-
-  function freeday() {
-    var freeday = null
-    props.data.freeday != null ?
-    freeday = <>freeday: {props.data.freeday}</>
-    :
-    freeday = null
-    return freeday
-  }
 
   return (
       <Card id='card_root'>
-        <div id='card_imagebox' style={{position:'relative'}}>
-        <Swiper
-            spaceBetween={50}
-            slidesPerView={1}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
-          >
-        {props.images !== null?props.images === undefined?props.data.images.map((step, index) => (
-            <div key={props.data.name}>
-              {Math.abs(activeStep - index) <= 2?(
-                <img className={classes.img} src={step}/>
-              ) :null }
-            </div>)):props.images.map((step, index) => (
-            <div key={props.id}>
-              {Math.abs(activeStep - index) <= 2?(
-                <img className={classes.img} src={step.image}/>
-              ) :null }
-            </div>)):null}
-          </Swiper>
-          <div id='card_stepper'>
-          <MobileStepper
-          variant="dots"
-          steps={maxSteps>1? maxSteps: 0 }
-          position="static"
-          activeStep={activeStep}
-          nextButton={
-            <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1} id='outline'>
-              {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
-            </Button>
-          }
-          backButton={
-            <Button size="small" onClick={handleBack} disabled={activeStep === 0} id='outline'>
-              {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
-            </Button>
-          }
-          />
-          </div>
-    </div>
+        <CardImageStepper profile={profile}/>
 
     <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {props.data.name}
+          {profile.name}
         </Typography>
       </CardContent>
-      <Typography style={{marginLeft: '10px'}}>native language: {props.data.native_lan}<br/>
-                 want to learn: {props.data.foreign_lan}<br/><br/>
+      <Typography style={{marginLeft: '10px'}}>
+        native language: {profile.native_language.name}
+      </Typography>
+      <Typography style={{marginLeft: '10px'}}>
+        foreign language: {profile.foreign_language.name}
       </Typography>
       <CardActions disableSpacing>
         <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
           onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
@@ -148,9 +56,8 @@ function Card(props) {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-        <Typography paragraph>{freeday}  {time}</Typography>
           <Typography className='card_intro'  paragraph>
-            {props.intro}
+            {profile.intro}
           </Typography>
         </CardContent>
       </Collapse>
@@ -159,5 +66,5 @@ function Card(props) {
 }
 
 
-export default Card;
+export default ProfileCard;
 

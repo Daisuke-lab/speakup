@@ -1,14 +1,7 @@
 from rest_framework import serializers
 
-from chats.models import Chat, Contact, File, Message
-# StringRelatedField
-class ContactSerializers(serializers.ModelSerializer):
-    # def to_internal_value(self, value):
-    #     return value
+from chats.models import Chat, File, Message
 
-    class Meta:
-        model = Contact
-        fields = '__all__'
 
 class FileSerializers(serializers.ModelSerializer):
     # def to_internal_value(self, value):
