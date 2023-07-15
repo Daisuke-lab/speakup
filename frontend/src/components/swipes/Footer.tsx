@@ -1,5 +1,5 @@
 import React from 'react'
-import '../assets/Swipe/Footer.css'
+import styles from "../../../styles/Swipe.module.css"
 import ReplayIcon from '@mui/icons-material/Replay';
 import CloseIcon from '@mui/icons-material/Close';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -25,13 +25,13 @@ function Footer(props:Props) {
     }
   return (
     <div className="footer">
-      <IconButton id='swipeButtons_nope' onClick={() => onClick("left")}>
+      <IconButton className={styles.swipeButtonNope} onClick={() => onClick("left")}>
         <CloseIcon fontSize='large'/>
       </IconButton>
-      <IconButton id='swipeButtons_repeat'>
+      <IconButton className={styles.swipeButtonRepeat}>
         <ReplayIcon fontSize='large'/>
       </IconButton>
-      <IconButton id='swipeButtons_like' onClick={() => onClick("right")}>
+      <IconButton className={styles.swipeButtonLike} onClick={() => onClick("right")}>
         <FavoriteIcon fontSize='large'/>
       </IconButton>
     </div>

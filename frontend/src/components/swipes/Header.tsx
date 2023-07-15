@@ -1,5 +1,5 @@
 import React from 'react'
-import '../assets/Swipe/Header.css'
+import styles from "../../../styles/Swipe.module.css"
 import PersonIcon from '@mui/icons-material/Person';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import SpaIcon from '@mui/icons-material/Spa';
@@ -11,18 +11,18 @@ import IconButton from '@mui/material/IconButton';
 // the second one is backButton is '/' and you can get ArrowbackIosIcon. if you click the icon. you can back to '/' which is backButton
 function Header() {
   return (
-    <div className="header">
+    <div className={styles.header}>
 
-      <IconButton id='header_icon'>
+      <IconButton className={styles.headerIcon}>
       <PersonIcon fontSize='large'/>
       </IconButton>
 
 
-      <IconButton id='header_logo'>
+      <IconButton className={styles.headerLogo}>
       <SpaIcon style={{ fontSize: 50 }}/>
       </IconButton>
 
-      <IconButton id='header_icon'>
+      <IconButton className={styles.headerIcon}>
       <QuestionAnswerIcon fontSize='large'/>
       </IconButton>
 

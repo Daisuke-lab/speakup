@@ -1,3 +1,4 @@
+'use client'
 import { NextPage } from "next"
 import {default as CardController}  from 'react-tinder-card'
 import Header from "../src/components/swipes/Header"
