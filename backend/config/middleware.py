@@ -14,6 +14,7 @@ class SpeakUpMiddleware():
         response = self.get_response(request)
         payload = JWTUtil.get_jwt_payload(request)
         print(payload)
+        print("valid token::", JWTUtil.verify_jwt(request))
         
 
         return response

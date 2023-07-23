@@ -3,7 +3,8 @@ from .oauth_util import OAuthUtil
 import jwt
 from django.conf import settings
 import json
-
+GOOGLE_ISSUER = 'https://accounts.google.com'
+CLIENT_ID = '3391403677-hq0b1v297vme0p7jjh234a344lrol8gm.apps.googleusercontent.com'
 
 class JWTUtil():
 
@@ -47,12 +48,20 @@ class JWTUtil():
         header = JWTUtil.get_jwt_header(request)
         public_key = OAuthUtil.get_google_public_key(header["kid"])
         try:
+            print(public_key)
             # Verify the JWT using the RSA public key
-            decoded_payload = jwt.decode(token, public_key, algorithms=["RS256"])
+            #decoded_payload = jwt.decode(token, public_key, algorithms=["RS256"])
+            claims = jwt.decode(token,
+                    public_key,
+                    issuer=GOOGLE_ISSUER,
+                    audience=CLIENT_ID,
+                    algorithms=["RS256"])
             return True
         except jwt.ExpiredSignatureError:
+            print("token is expired")
             return False
         except jwt.InvalidTokenError:
+            print("token is invalid")
             return False
         
     def get_provider(request):

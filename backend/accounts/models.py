@@ -16,7 +16,7 @@ class User(models.Model):
     emailVerified = models.DateTimeField(null=True)
     image = models.CharField(max_length=1000, null=True)
     class Meta:
-        db_table = 'user'
+        db_table = 'User'
  
 class Account(models.Model):
     id = models.CharField(max_length=200,primary_key=True)
@@ -36,7 +36,7 @@ class Account(models.Model):
  
     class Meta:
         unique_together = [['provider', 'providerAccountId']]
-        db_table = 'account'
+        db_table = 'Account'
  
  
  
@@ -47,7 +47,7 @@ class Session(models.Model):
     expires = models.DateTimeField()
  
     class Meta:
-        db_table = 'session'
+        db_table = 'Session'
  
  
 class VerificationToken(models.Model):
@@ -57,7 +57,7 @@ class VerificationToken(models.Model):
  
     class Meta:
         unique_together = [['identifier', 'token']]
-        db_table = 'verificationtoken'
+        db_table = 'VerificationToken'
 
 
 class Language(models.Model):
