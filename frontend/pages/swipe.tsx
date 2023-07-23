@@ -1,6 +1,7 @@
 'use client'
 import { NextPage } from "next"
-import {default as CardController}  from 'react-tinder-card'
+import dynamic from 'next/dynamic'
+//import {default as CardController}  from 'react-tinder-card'
 import Header from "../src/components/swipes/Header"
 import Footer from "../src/components/swipes/Footer"
 import Card from "../src/components/swipes/Card"
@@ -15,6 +16,9 @@ import { setCurrentProfile } from "../store/reducers/swipeReducer"
 interface Props {
     profiles: ProfileType[]    
 }
+
+
+const CardController = dynamic(() => import('react-tinder-card'), {ssr: false})
 
 const Swipe: NextPage = (props) => {
     const {profiles} = props as Props
@@ -46,7 +50,7 @@ const Swipe: NextPage = (props) => {
     return (
         <>
         <Header/>
-        {profiles.map((profile) => (
+        {typeof window !== "undefined" && profiles.map((profile) => (
             <CardController
                 className='swipe' 
                 key={`card-controller-${profile.id}`}

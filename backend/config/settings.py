@@ -6,11 +6,12 @@ import os
 from datetime import timedelta
 import config
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-host = 'speakup-heroku.herokuapp.com'
-deploy = True
+import environ
 
-#django_heroku.settings(locals())
+env = environ.Env()
+env.read_env('.env')
 
+JWT_SECRET = env('JWT_SECRET')
 
 
 #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) #DIFFERENCE
@@ -70,6 +71,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "config.middleware.SpeakUpMiddleware"
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -91,7 +93,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'config.wsgi.application'
+#WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.routing.application'#DIFFERENCE
 
 CHANNEL_LAYERS = {#DIFFERENCE
@@ -223,4 +225,6 @@ MEDIA_URL = '/images/'
 #static/images
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
+
+GOOGLE = "google"
 

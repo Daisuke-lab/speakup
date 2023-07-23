@@ -4,7 +4,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
 import SpaIcon from '@mui/icons-material/Spa';
 import IconButton from '@mui/material/IconButton';
-
+import PetsIcon from '@mui/icons-material/Pets';
 
 // there is two Header so far in App.js. the one is without variable and the other is with a variable
 // the first one is backButton is null so you can get PersonIcon
@@ -19,7 +19,7 @@ function Header() {
 
 
       <IconButton className={styles.headerLogo}>
-      <SpaIcon style={{ fontSize: 50 }}/>
+      <PetsIcon style={{ fontSize: 50 }}/>
       </IconButton>
 
       <IconButton className={styles.headerIcon}>
