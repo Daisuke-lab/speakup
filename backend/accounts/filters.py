@@ -1,13 +1,28 @@
+from utils.jwt_util import JWTUtil
 import django_filters
 from .models import Profile
 from django_filters import DateFilter
 from django_filters import rest_framework as filters
+
+
+class SwipedFilter(filters.Filter):
+
+    def filter(self, qs, value):
+        user = JWTUtil.get_user(self.request)
+        if value and user is not None:
+            product_ids = Profile.objects.filter(
+                **{f'profile__user_id__not_in': user.id}
+                )
+            return qs.filter(id__in=product_ids)
+        return qs
+    
 
 class ProfileFilter(filters.FilterSet):
     age = filters.RangeFilter(field_name='age')
     native_lan = filters.CharFilter(field_name='native_lan')
     foreign_lan = filters.CharFilter(field_name='foreign_lan')
     gender = filters.CharFilter(field_name='gender')
+    swiped = SwipedFilter(field_name="swiped")
     class Meta:
         model = Profile
         fields = ['age', 'native_lan', 'foreign_lan', 'gender']

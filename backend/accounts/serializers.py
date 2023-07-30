@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from .models import Profile, Image
 from django.db.models import F, Value
-from PIL import Image
 import io
 import sys
 from django.core.files.storage import get_storage_class
@@ -13,8 +12,22 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ['id','user', 'name', 'age', 'gender', 'native_lan', 'foreign_lan', 'location', 'time_start', 'time_end',
-        'intro', 'freeday', 'images']
+        fields = "__all__"
+
+    def create(self, validated_data):
+        profile = Profile.objects.create(**validated_data)
+        return profile
+    
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get('name', instance.domain)
+        instance.age = validated_data.get("age", instance.age)
+        instance.native_language = validated_data.get("native_language", instance.native_language)
+        instance.foreign_language = validated_data.get("foreign_language", instance.foreign_language)
+        instance.nationality = validated_data.get("nationality", instance.nationality)
+        instance.intro = validated_data.get("intro", instance.intro)
+
+        return instance
+        
 
 class ImageSerializer(serializers.ModelSerializer):
     #absolute_url = serializers.SerializerMethodField()
@@ -32,7 +45,7 @@ class ImageSerializer(serializers.ModelSerializer):
         album = validated_data.get('album')
         image = image.crop((x, y, x+width, y+height))
         output = io.BytesIO()
-        image.save(output, format='JPEG',)
+        image.save(output, format='JPEG')
         serialzed_image = InMemoryUploadedFile(output, 'ImageField', str(image_file),'image/jpeg',sys.getsizeof(output), None)
         
 
@@ -41,10 +54,4 @@ class ImageSerializer(serializers.ModelSerializer):
 
         return Image.objects.create(**data)
 
-    # def get_absolute_url(self, picture):
-    #     print('ABSOLUTE')
-    #     request = self.context.get('request')
-    #     photo_url = picture.image.url
-    #     print(photo_url)
-    #     return picture
 

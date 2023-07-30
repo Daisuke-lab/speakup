@@ -3,8 +3,8 @@ from .oauth_util import OAuthUtil
 import jwt
 from django.conf import settings
 import json
-GOOGLE_ISSUER = 'https://accounts.google.com'
-CLIENT_ID = '3391403677-hq0b1v297vme0p7jjh234a344lrol8gm.apps.googleusercontent.com'
+
+
 
 class JWTUtil():
 
@@ -53,8 +53,8 @@ class JWTUtil():
             #decoded_payload = jwt.decode(token, public_key, algorithms=["RS256"])
             claims = jwt.decode(token,
                     public_key,
-                    issuer=GOOGLE_ISSUER,
-                    audience=CLIENT_ID,
+                    issuer=settings.GOOGLE_OAUTH["issuer"],
+                    audience=settings.GOOGLE_OAUTH["client_id"],
                     algorithms=["RS256"])
             return True
         except jwt.ExpiredSignatureError:
@@ -68,8 +68,8 @@ class JWTUtil():
         payload = JWTUtil.get_jwt_payload(request)
         issuer = payload.get("iss")
         
-        if settings.GOOGLE in issuer:
-            settings.GOOGLE
+        if settings.GOOGLE_OAUTH["issuer"] in issuer:
+            return settings.GOOGLE_OAUTH["provider"]
 
         
     def get_account(request):

@@ -226,5 +226,11 @@ MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 
-GOOGLE = "google"
+
+GOOGLE_OAUTH = {
+    "issuer": "https://accounts.google.com",
+    "provider": "google",
+    "client_id": "3391403677-hq0b1v297vme0p7jjh234a344lrol8gm.apps.googleusercontent.com"
+}
+
 

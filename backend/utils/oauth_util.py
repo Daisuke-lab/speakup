@@ -9,7 +9,6 @@ import json
 class OAuthUtil():
 
     def get_google_public_key(kid):
-        print("KID::", kid)
         url = "https://accounts.google.com/.well-known/openid-configuration"
         res = requests.get(url)
         jwks_uri = res.json()["jwks_uri"]

@@ -10,13 +10,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('list/', ProfileList.as_view()),
-    path('create/',ProfileListCreateView.as_view()),
-    path('update/<int:pk>/', ProfileRetrieveUpdateDestroyView.as_view()),
-    path('delete/<int:pk>/', ProfileRetrieveUpdateDestroyView.as_view()),
-    path('detail/<pk>/', get_profile),
-    path('friend/<pk>/', ProfileRetrieveUpdateDestroyView.as_view()),
-    path('image/', ImageListCreate.as_view()),
-    path('image/<pk>/', ImageDetail.as_view()),
+    path('/profiles', ProfileListCreateView.as_view()),
+    path('/profiles/<int:id?',ProfileRetrieveUpdateDestroyView.as_view()),
+    path('/images', ProfileListCreateView.as_view()),
+    path('/images/<int:id?',ProfileRetrieveUpdateDestroyView.as_view()),
     # url(r'^test/$', ProfileList.as_view())
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
