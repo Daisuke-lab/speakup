@@ -45,10 +45,14 @@ class JWTUtil():
     
     def verify_jwt(request):
         token = JWTUtil.get_token(request)
+        if token is None:
+            return False
         header = JWTUtil.get_jwt_header(request)
+        if header.get("kid") is None:
+            return False
+        
         public_key = OAuthUtil.get_google_public_key(header["kid"])
         try:
-            print(public_key)
             # Verify the JWT using the RSA public key
             #decoded_payload = jwt.decode(token, public_key, algorithms=["RS256"])
             claims = jwt.decode(token,

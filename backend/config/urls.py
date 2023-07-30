@@ -12,7 +12,7 @@ prefix = f"api/{settings.API_VERSION}"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'favicon.ico')),
-    path(f'{prefix}/ping', ping),
+    path(f'{prefix}/ping/<int:id>', ping),
     path(f'{prefix}/chats', include('chats.urls')),
     path(f'{prefix}/accounts', include('accounts.urls')),
     path(f'{prefix}/swipes', include('swipes.urls')),

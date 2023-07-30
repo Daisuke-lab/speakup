@@ -1,5 +1,8 @@
-from .jwt_util import JWTUtil
+from accounts.models import Profile
+from utils.jwt_util import JWTUtil
 from rest_framework import permissions
+from django.shortcuts import get_object_or_404
+
 
 class JWTPermission(permissions.BasePermission):
     message = 'Your token is invalid or expired.'
@@ -8,21 +11,21 @@ class JWTPermission(permissions.BasePermission):
         return JWTUtil.verify_jwt(request)
     
 
-class IsAuthorized(permissions.BasePermission):
+class IsAuthorizedForUpdateOrDelete(permissions.BasePermission):
     message = "you don't have authorization to do this."
 
     def has_permission(self, request, view):
 
-        if request.GET:
+        if request.GET or request.POST:
             return True
-        elif request.POST or request.PUT:
+        else:
             return JWTUtil.get_user(request) == self.get_user(request)
-        elif request.DELETE:
-            return JWTUtil.get_user(request) == self.get_user_for_delete(request)
 
     def get_user(self, request):
-        request.data
-
-    def get_user_for_delete(self, request):
-        request.data
+        pk = request.resolver_match.kwargs.get("pk")
+        
+        if "profiles" in request.path:
+            profile = get_object_or_404(Profile, id=pk)
+            return profile.user
+        
 

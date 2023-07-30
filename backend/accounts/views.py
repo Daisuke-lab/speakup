@@ -10,7 +10,7 @@ import os
 from django.conf import settings
 from django.core import serializers
 from rest_framework import permissions
-from config.permissions import JWTPermission
+from config.permissions import IsAuthorizedForUpdateOrDelete, JWTPermission
 
 
 
@@ -24,7 +24,7 @@ class ProfileListCreateView(ListCreateAPIView):
 class ProfileRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    permission_classes = [JWTPermission]
+    permission_classes = [JWTPermission, IsAuthorizedForUpdateOrDelete]
 
 
 class ImageListCreateView(ListCreateAPIView):
@@ -36,7 +36,7 @@ class ImageListCreateView(ListCreateAPIView):
 class ImageRetrieveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
-    permission_classes = [JWTPermission]
+    permission_classes = [JWTPermission, IsAuthorizedForUpdateOrDelete]
 
 
 
