@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import swipeReducer from './reducers/swipeReducer'
+import commonReducer from './reducers/commonReducer'
 
 
 
 const store =  configureStore({
   reducer: {
+    commons: commonReducer,
     swipes: swipeReducer}
 })
 export default store

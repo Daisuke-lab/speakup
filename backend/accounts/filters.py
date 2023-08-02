@@ -23,9 +23,10 @@ class ProfileFilter(filters.FilterSet):
     foreign_lan = filters.CharFilter(field_name='foreign_lan')
     gender = filters.CharFilter(field_name='gender')
     swiped = SwipedFilter(field_name="swiped")
+    user_id = filters.CharFilter(field_name="user_id")
     class Meta:
         model = Profile
-        fields = ['age', 'native_lan', 'foreign_lan', 'gender']
+        fields = ['age', 'native_lan', 'foreign_lan', 'gender', "user_id"]
 
         # fields = {
         #     'native_lan': ['exact', 'contains'],

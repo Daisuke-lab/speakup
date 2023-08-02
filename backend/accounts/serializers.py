@@ -8,7 +8,6 @@ from django.core.files.uploadedfile import InMemoryUploadedFile, UploadedFile
 
 
 class ProfileSerializer(serializers.ModelSerializer):
-    images = serializers.StringRelatedField(read_only=True, many=True)
 
     class Meta:
         model = Profile

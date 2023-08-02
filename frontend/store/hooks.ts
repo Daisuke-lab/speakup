@@ -4,7 +4,7 @@ import {useEffect} from 'react'
 //import type { RootState, AppDispatch } from '../../store/store'
 
 //const store = dynamic(() => import('../../store/store'), { ssr: false });
-import store, {AppDispatch, RootState} from '../../store/store'
+import store, {AppDispatch, RootState} from './store'
 
 
 

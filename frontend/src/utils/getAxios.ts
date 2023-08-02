@@ -9,7 +9,7 @@ export default function getAxios(session:CustomSessionType | null) {
     headers["Authorization"] = `Bearer ${session?.accessToken}`
   }
   const backendAxios = axios.create({
-    baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api/v1`,
+    baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api/${API_VERSION}`,
     responseType: "json",
     headers: headers,
   });
