@@ -61,10 +61,12 @@ class VerificationToken(models.Model):
 
 
 class Language(models.Model):
-    name = models.CharField(max_length=200)
+    code = models.CharField(max_length=200)
+    label = models.CharField(max_length=200)
     
 class Nationality(models.Model):
-    name = models.CharField(max_length=200)
+    code = models.CharField(max_length=200)
+    label = models.CharField(max_length=200)
 
 
 class Profile(models.Model):
