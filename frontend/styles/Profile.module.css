@@ -1,0 +1,13 @@
+
+
+.profileCreateContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 50px;
+    height: 500px;
+    margin-right: auto;
+    margin-left: auto;
+
+}

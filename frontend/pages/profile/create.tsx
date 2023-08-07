@@ -10,7 +10,7 @@ import ProfileCreateTab1 from "../../src/components/profile/ProfileCreateTab1";
 import ProfileCreateTab2 from "../../src/components/profile/ProfileCreateTab2";
 import ProfileCreateTab3 from "../../src/components/profile/ProfileCreateTab3";
 import { Stack } from "@mui/material";
-
+import styles from "../../styles/Profile.module.css"
 
 
 const ProfileCreatePage: NextPage = (props) => {
@@ -44,8 +44,18 @@ const ProfileCreatePage: NextPage = (props) => {
 
 
     return (
-        <Box sx={{ width: '100%' }}>
-            <Stepper activeStep={activeStep}>
+        <Box sx={{ width: '70%' }} className={styles.profileCreateContainer}>
+            
+
+                <h3>{labels[activeStep]}</h3>
+                <form>
+                {renderTab(activeStep)}
+                <Stack spacing={2} direction="row" justifyContent="space-between">
+                    <Button variant="contained" disabled={activeStep === 0} onClick={handleBack}>Back</Button>
+                    <Button variant="contained" onClick={handleNext}>{activeStep +1 === steps.length?"Complete":"Next"}</Button>
+                </Stack>
+                </form>
+                <Stepper activeStep={activeStep}>
                 {steps.map((step, index) => {
 
                 return (
@@ -55,16 +65,7 @@ const ProfileCreatePage: NextPage = (props) => {
                 );
                 })}
             </Stepper>
-            <div>
-                <h3>{labels[activeStep]}</h3>
-                <form>
-                {renderTab(activeStep)}
-                <Stack spacing={2} direction="row" justifyContent="space-between">
-                    <Button variant="contained" disabled={activeStep === 0} onClick={handleBack}>Back</Button>
-                    <Button variant="contained" onClick={handleNext}>{activeStep +1 === steps.length?"Complete":"Next"}</Button>
-                </Stack>
-                </form>
-            </div>
+
             
         </Box>
     )
