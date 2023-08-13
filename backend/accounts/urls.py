@@ -14,5 +14,7 @@ urlpatterns = [
     path('/profiles/<int:id?',ProfileRetrieveUpdateDestroyView.as_view()),
     path('/images', ProfileListCreateView.as_view()),
     path('/images/<int:id?',ProfileRetrieveUpdateDestroyView.as_view()),
+    path('/nationalities', NationalityListCreateView.as_view()),
+    path('/languages', LanguageListCreateView.as_view()),
     # url(r'^test/$', ProfileList.as_view())
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

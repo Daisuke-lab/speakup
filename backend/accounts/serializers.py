@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Profile, Image
+from .models import Language, Nationality, Profile, Image
 from django.db.models import F, Value
 import io
 import sys
@@ -7,11 +7,28 @@ from django.core.files.storage import get_storage_class
 from django.core.files.uploadedfile import InMemoryUploadedFile, UploadedFile
 
 
+
+class NationalitySerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Nationality
+        fields = "__all__"
+
+class LanguageSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Language
+        fields = "__all__"
+
+
 class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
         fields = "__all__"
+
+    
+    
 
     def create(self, validated_data):
         profile = Profile.objects.create(**validated_data)

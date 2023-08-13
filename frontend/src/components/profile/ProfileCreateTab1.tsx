@@ -1,7 +1,25 @@
 import { Autocomplete, Box, TextField } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import getAxios from '../../utils/getAxios'
+import { CustomSessionType } from '../../../types/CustomSessionType'
+import { useSession } from 'next-auth/react'
+import CountryType from '../../../types/CountryType'
 
 function ProfileCreateTab1() {
+  const { data: session } = useSession()
+  const axios = getAxios(session as unknown as CustomSessionType | null)
+  const [countries, setCountries] = useState<CountryType[]>([])
+  useEffect(() => {
+    getCountries()
+  }, [])
+
+  const getCountries = async () => {
+    try {
+      const res = await axios.get("countires")
+    } catch(err) {
+      console.log(err)
+    }
+  }
   return (
     <div>
       <TextField label="Name" variant="standard" />
