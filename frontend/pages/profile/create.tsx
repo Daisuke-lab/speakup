@@ -47,7 +47,7 @@ const ProfileCreatePage: NextPage = (props) => {
         <Box sx={{ width: '70%' }} className={styles.profileCreateContainer}>
             
 
-                <h3>{activeStep}. {labels[activeStep]}</h3>
+                <h3>{activeStep+1}. {labels[activeStep]}</h3>
                 <form>
                 {renderTab(activeStep)}
                 <Stack spacing={2} direction="row" justifyContent="space-between">

@@ -11,3 +11,14 @@
     margin-left: auto;
 
 }
+
+.tabContainer {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    align-items: center;
+    justify-content: space-around;
+    margin-right: auto;
+    margin-left: auto;
+    height: 350px;
+}

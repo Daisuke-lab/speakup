@@ -4,6 +4,7 @@ import getAxios from '../../utils/getAxios'
 import { CustomSessionType } from '../../../types/CustomSessionType'
 import { useSession } from 'next-auth/react'
 import CountryType from '../../../types/CountryType'
+import styles from "../../../styles/Profile.module.css"
 
 function ProfileCreateTab1() {
   const { data: session } = useSession()
@@ -15,15 +16,16 @@ function ProfileCreateTab1() {
 
   const getCountries = async () => {
     try {
-      const res = await axios.get("countires")
+      const res = await axios.get("accounts/nationalities")
+      setCountries(res.data)
     } catch(err) {
       console.log(err)
     }
   }
   return (
-    <div>
-      <TextField label="Name" variant="standard" />
-      <TextField label="Age" variant="standard" />
+    <div className={styles.tabContainer}>
+      <TextField label="Name" variant="standard"sx={{ width: 300 }} />
+      <TextField label="Age" variant="standard" sx={{ width: 300 }} type="number"/>
       <Autocomplete
       id="country-select-demo"
       sx={{ width: 300 }}
@@ -45,7 +47,9 @@ function ProfileCreateTab1() {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Choose a country"
+          label="Country"
+          variant="standard"
+          fullWidth
           inputProps={{
             ...params.inputProps,
             autoComplete: 'new-password', // disable autocomplete and autofill

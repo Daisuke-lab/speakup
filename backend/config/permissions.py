@@ -8,7 +8,6 @@ class JWTPermission(permissions.BasePermission):
     message = 'Your token is invalid or expired.'
 
     def has_permission(self, request, view):
-        return True
         return JWTUtil.verify_jwt(request)
     
 
