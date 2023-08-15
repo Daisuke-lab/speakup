@@ -50,7 +50,7 @@ const ProfileCreatePage: NextPage = (props) => {
                 <h3>{activeStep+1}. {labels[activeStep]}</h3>
                 <form>
                 {renderTab(activeStep)}
-                <Stack spacing={2} direction="row" justifyContent="space-between">
+                <Stack spacing={2} direction="row" justifyContent="space-between" style={{marginTop: "50px"}}>
                     <Button variant="contained" disabled={activeStep === 0} onClick={handleBack}>Back</Button>
                     <Button variant="contained" onClick={handleNext}>{activeStep +1 === steps.length?"Complete":"Next"}</Button>
                 </Stack>
